@@ -1,7 +1,7 @@
 if status is-interactive
 	# CURSOR
 	#echo -ne '\eP\e]13;#5F5FAF\a'   # HC1
-	echo -ne '\eP\e]12;#79bda4\a'   # HC1
+	echo -ne '\eP\e]12;#b46ade\a'   # HC1
 	# echo -ne '\eP\e]12;#679e8a\a'   # HC1
 	# echo -ne '\eP\e]12;#53cfcc\a'   # HC1
 	#echo -ne '\eP\e]12;#6d207a\a'	# HC2
@@ -38,7 +38,8 @@ set -x LC_ALL ko_KR.UTF-8
 #set CLANGHOME /usr/local/clang+llvm-17.0.6-x86_64-linux-gnu-ubuntu-22.04
 # set -l NODEHOME /usr/local/node-v22.18.0-linux-armv7l
 # set -l NODEHOME /usr/local/node-v22.18.0-linux-x64
-set -l NODEHOME /usr/local/node-v22.22.0-linux-x64
+# set -l NODEHOME /usr/local/node-v22.22.0-linux-x64
+set -l NODEHOME /usr/local/node-v24.14.0-linux-x64 
 # set -x PATH $CLANGHOME/bin $PATH
 set -x PATH $HOME/.go/bin /usr/local/go1.17.3/bin $NODEHOME/bin $PATH
 
