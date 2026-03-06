@@ -24,10 +24,12 @@ add_newline = false
 # [CACHY](bold fg:#d66097)\
 # [M5](bold fg:#e87272)\
 # [M5](bold fg:#8e58ad)\
+# [M5](bold fg:#b46ade)\
+# [M5](bold fg:#c44164)\
 
 format = """
 $python\
-[M5](bold fg:#b46ade)\
+[M5](bold fg:#d64b70)\
 $username\
 $directory\
 $git_branch$git_commit\
@@ -42,7 +44,8 @@ $character\
 # success_symbol = "[❯](bold #679e8a)"
 # success_symbol = "[❯](bold #9350c7)"
 # success_symbol = "[❯](bold #c45186)"
-success_symbol = "[❯](bold #b46ade)"
+# success_symbol = "[❯](bold #b46ade)"
+success_symbol = "[❯](bold #d64b70)"
 #error_symbol = "[✗](fg:1)"
 error_symbol = "[❯](fg:1)"
 # error_symbol = "[❯](fg:#7c33bd)"
