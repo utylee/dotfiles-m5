@@ -1,0 +1,12 @@
+[Unit]
+Description=ComfyUI
+After=network.target
+
+[Service]
+ExecStart=/home/utylee/.pyenv/versions/3.10.20/bin/python /home/utylee/ComfyUI/main.py --listen 0.0.0.0 --port 8188 --force-fp16
+WorkingDirectory=/home/utylee/temp/ComfyUI
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=default.target
