@@ -1,7 +1,8 @@
 if status is-interactive
 	# CURSOR
 	#echo -ne '\eP\e]13;#5F5FAF\a'   # HC1
-	echo -ne '\eP\e]12;#b46ade\a'   # HC1
+	# echo -ne '\eP\e]12;#b46ade\a'   # HC1
+	echo -ne '\eP\e]12;#d64b70\a'   # m5
 	# echo -ne '\eP\e]12;#679e8a\a'   # HC1
 	# echo -ne '\eP\e]12;#53cfcc\a'   # HC1
 	#echo -ne '\eP\e]12;#6d207a\a'	# HC2
@@ -24,9 +25,13 @@ set -Ux fish_term24bit 1
 set -gx EDITOR /usr/bin/vi
 set -gx GHQ_ROOT /home/utylee/.ghq
 
+# /tmp 용량부족으로 대용량 파일 설치시 문제가 생겨 /mnt/win 을 지정해줍니다
+set -x TMPDIR $HOME/temp/.pip-tmp
+set -x PIP_CACHE_DIR $HOME/temp/.pip-cache
+
 # for llama-server of wsl2 ssh
 set -gx LLS_MODELS_DIR /home/utylee/temp/llm_models/
-set -gx LLS_LLAMA_BIN  /home/utylee/temp/llama.cpp/build-vk/bin/llama-server
+set -gx LLS_LLAMA_BIN  /home/utylee/temp/llama.cpp/build/bin/llama-server
 
 set -x LANG ko_KR.UTF-8
 set -x LANGUAGE ko_KR:ko
@@ -43,10 +48,10 @@ set -l NODEHOME /usr/local/node-v24.14.0-linux-x64
 # set -x PATH $CLANGHOME/bin $PATH
 set -x PATH $HOME/.go/bin /usr/local/go1.17.3/bin $NODEHOME/bin $PATH
 
-fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/llama.cpp/build-vk/bin /home/utylee/temp/bin 
+fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/llama.cpp/build/bin /home/utylee/temp/bin 
 #set -gx CC $CLANGHOME/bin/clang
 #set -gx CXX $CLANGHOME/bin/clang++
-set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build-vk/bin $LD_LIBRARY_PATH
+set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
 
 # FZF
 # fzf을 직접입력해 파일명 탐색 명내용 
