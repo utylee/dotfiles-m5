@@ -3,7 +3,11 @@ Description=ComfyUI
 After=network.target
 
 [Service]
-ExecStart=/home/utylee/.pyenv/versions/3.10.20/bin/python /home/utylee/ComfyUI/main.py --listen 0.0.0.0 --port 8188 --force-fp16
+#메모리 과점유 줄임
+Environment=PYTORCH_HIP_ALLOC_CONF=garbage_collection_threshold:0.6,max_split_size_mb:512
+; ExecStart=/home/utylee/temp/ComfyUI/.venv-3.10/bin/python /home/utylee/temp/ComfyUI/main.py --listen 0.0.0.0 --port 8188 --force-fp16
+; ExecStart=/home/utylee/temp/ComfyUI/.venv-3.10/bin/python /home/utylee/temp/ComfyUI/main.py --max-upload-size 10240 --listen 0.0.0.0 --port 8188 
+ExecStart=/home/utylee/temp/ComfyUI/.venv-3.11/bin/python /home/utylee/temp/ComfyUI/main.py --max-upload-size 10240 --listen 0.0.0.0 --port 8188 
 WorkingDirectory=/home/utylee/temp/ComfyUI
 Restart=always
 RestartSec=3

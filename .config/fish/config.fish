@@ -33,6 +33,14 @@ set -x PIP_CACHE_DIR $HOME/temp/.pip-cache
 set -gx LLS_MODELS_DIR /home/utylee/temp/llm_models/
 set -gx LLS_LLAMA_BIN  /home/utylee/temp/llama.cpp/build/bin/llama-server
 
+#메모리 과점유 줄임
+#fragmentation 감소
+#100GB 먹는 현상 완화
+set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.6,max_split_size_mb:512"
+
+#GPU(=RAM) 최대한 사용 허용
+set -x GPU_MAX_HEAP_SIZE 100
+
 set -x LANG ko_KR.UTF-8
 set -x LANGUAGE ko_KR:ko
 set -x LC_ALL ko_KR.UTF-8
