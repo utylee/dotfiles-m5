@@ -40,6 +40,7 @@ set -x HSA_OVERRIDE_GFX_VERSION 11.5.0
 # SDMA 충돌 방지는 여전히 유효 (최신 드라이버에서도 안정성 확보)
 set -x HSA_ENABLE_SDMA 0
 
+
 # grok
 set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
 
