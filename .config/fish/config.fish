@@ -33,13 +33,40 @@ set -x PIP_CACHE_DIR $HOME/temp/.pip-cache
 set -gx LLS_MODELS_DIR /home/utylee/temp/llm_models/
 set -gx LLS_LLAMA_BIN  /home/utylee/temp/llama.cpp/build/bin/llama-server
 
-#메모리 과점유 줄임
-#fragmentation 감소
-#100GB 먹는 현상 완화
-set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.6,max_split_size_mb:512"
 
-#GPU(=RAM) 최대한 사용 허용
-set -x GPU_MAX_HEAP_SIZE 100
+# Strix Halo(RDNA 3.5) 타겟팅
+set -x HSA_OVERRIDE_GFX_VERSION 11.5.0
+
+# SDMA 충돌 방지는 여전히 유효 (최신 드라이버에서도 안정성 확보)
+set -x HSA_ENABLE_SDMA 0
+
+# grok
+set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
+
+# # 고성능 칩셋이므로 메모리 할당 단위를 키웁니다 (512MB 권장)
+# set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
+
+
+##메모리 과점유 줄임
+##fragmentation 감소
+##100GB 먹는 현상 완화
+#set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.6,max_split_size_mb:512"
+
+## PyTorch 메모리 관리 최적화 (AMD/HIP 및 호환성용 CUDA 모두 설정)
+#set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.6,max_split_size_mb:128,expandable_segments:True"
+#set -x PYTORCH_CUDA_ALLOC_CONF "garbage_collection_threshold:0.6,max_split_size_mb:128,expandable_segments:True"
+
+##GPU(=RAM) 최대한 사용 허용
+## set -x GPU_MAX_HEAP_SIZE 100
+#set -x GPU_MAX_HEAP_SIZE 50
+
+# # PyTorch가 한 번에 가져갈 수 있는 램의 단위를 극단적으로 줄입니다.
+# # 64MB 단위로 쪼개서 쓰고, 안 쓰면 즉시 반납하게 합니다.
+# set -x PYTORCH_HIP_ALLOC_CONF "max_split_size_mb:64,garbage_collection_threshold:0.5,expandable_segments:True"
+# set -x PYTORCH_CUDA_ALLOC_CONF "max_split_size_mb:64,garbage_collection_threshold:0.5,expandable_segments:True"
+
+# # 리눅스 커널에게 메모리 반환을 강제합니다 (CachyOS 필수)
+# set -x MALLOC_CONF "dirty_decay_ms:0,muzzy_decay_ms:0"
 
 set -x LANG ko_KR.UTF-8
 set -x LANGUAGE ko_KR:ko
