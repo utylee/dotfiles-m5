@@ -42,7 +42,11 @@ set -x HSA_ENABLE_SDMA 0
 
 
 # grok
-set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
+# set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
+
+#memory shrink strategy
+set -x PYTORCH_HIP_ALLOC_CONF "expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.85"
+
 
 # # 고성능 칩셋이므로 메모리 할당 단위를 키웁니다 (512MB 권장)
 # set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
