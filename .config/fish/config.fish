@@ -26,7 +26,7 @@ set -gx EDITOR /usr/bin/vi
 set -gx GHQ_ROOT /home/utylee/.ghq
 
 # /tmp 용량부족으로 대용량 파일 설치시 문제가 생겨 /mnt/win 을 지정해줍니다
-set -x TMPDIR $HOME/temp/.pip-tmp
+# set -x TMPDIR $HOME/temp/.pip-tmp
 set -x PIP_CACHE_DIR $HOME/temp/.pip-cache
 
 # for llama-server of wsl2 ssh
@@ -40,13 +40,9 @@ set -x HSA_OVERRIDE_GFX_VERSION 11.5.0
 # SDMA 충돌 방지는 여전히 유효 (최신 드라이버에서도 안정성 확보)
 set -x HSA_ENABLE_SDMA 0
 
-
 # grok
+set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512,garbage_collection_threshold:0.8"
 # set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
-
-#memory shrink strategy
-set -x PYTORCH_HIP_ALLOC_CONF "expandable_segments:True,max_split_size_mb:256,garbage_collection_threshold:0.85"
-
 
 # # 고성능 칩셋이므로 메모리 할당 단위를 키웁니다 (512MB 권장)
 # set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
@@ -91,7 +87,8 @@ set -x PATH $HOME/.go/bin /usr/local/go1.17.3/bin $NODEHOME/bin $PATH
 fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/llama.cpp/build/bin /home/utylee/temp/bin 
 #set -gx CC $CLANGHOME/bin/clang
 #set -gx CXX $CLANGHOME/bin/clang++
-set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
+# set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
+set -x LD_LIBRARY_PATH /opt/rocm/lib /opt/rocm/lib/migraphx/lib /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
 
 # FZF
 # fzf을 직접입력해 파일명 탐색 명내용 
