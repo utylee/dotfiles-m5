@@ -88,7 +88,7 @@ fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x
 #set -gx CC $CLANGHOME/bin/clang
 #set -gx CXX $CLANGHOME/bin/clang++
 # set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
-set -x LD_LIBRARY_PATH /opt/rocm/lib /opt/rocm/lib/migraphx/lib /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
+set -x LD_LIBRARY_PATH /opt/rocm/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PATH
 
 # FZF
 # fzf을 직접입력해 파일명 탐색 명내용 
