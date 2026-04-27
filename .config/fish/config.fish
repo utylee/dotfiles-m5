@@ -34,15 +34,30 @@ set -gx LLS_MODELS_DIR /home/utylee/temp/llm_models/
 set -gx LLS_LLAMA_BIN  /home/utylee/temp/llama.cpp/build/bin/llama-server
 
 
+################################################
+# ROCM the rock
+
+# 환경 변수 설정 (~/.bashrc 또는 ComfyUI 실행 스크립트에 추가)
+# set -x ROCM_PATH /opt/therock
+set -x ROCM_PATH /opt/rocm
+
 # Strix Halo(RDNA 3.5) 타겟팅
-set -x HSA_OVERRIDE_GFX_VERSION 11.5.0
+# set -x HSA_OVERRIDE_GFX_VERSION 11.5.0
+set -x HSA_OVERRIDE_GFX_VERSION 11.0.0
+# ===> upscaling 속도 상승 효과 32초 ---> 26초
 
 # SDMA 충돌 방지는 여전히 유효 (최신 드라이버에서도 안정성 확보)
 set -x HSA_ENABLE_SDMA 0
+# set -x HSA_ENABLE_SDMA 1
+# set -x HSA_ENABLE_MWAITX 1
 
 # grok
-set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512,garbage_collection_threshold:0.8"
+# set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512,garbage_collection_threshold:0.8"
+set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:True,max_split_size_mb:512,garbage_collection_threshold:0.8"
 # set -x PYTORCH_CUDA_ALLOC_CONF "expandable_segments:False,max_split_size_mb:512"
+
+# AMD 전용 가속 활성화
+set -x TORCH_ROCM_AOT_RDNA3_ENABLED 1
 
 # # 고성능 칩셋이므로 메모리 할당 단위를 키웁니다 (512MB 권장)
 # set -x PYTORCH_HIP_ALLOC_CONF "garbage_collection_threshold:0.8,max_split_size_mb:512"
@@ -84,11 +99,15 @@ set -l NODEHOME /usr/local/node-v24.14.0-linux-x64
 # set -x PATH $CLANGHOME/bin $PATH
 set -x PATH $HOME/.go/bin /usr/local/go1.17.3/bin $NODEHOME/bin $PATH
 
-fish_add_path /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/llama.cpp/build/bin /home/utylee/temp/bin 
+fish_add_path $ROCM_PATH/bin /home/utylee/temp/opencode/packages/opencode/dist/opencode-linux-x64/bin /home/utylee/temp/llama.cpp/build/bin /home/utylee/temp/bin 
 #set -gx CC $CLANGHOME/bin/clang
 #set -gx CXX $CLANGHOME/bin/clang++
 # set -gx LD_LIBRARY_PATH /home/utylee/temp/llama.cpp/build/bin $LD_LIBRARY_PATH
-set -x LD_LIBRARY_PATH /opt/rocm/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PATH
+# set -x LD_LIBRARY_PATH /opt/rocm/lib64 /opt/rocm/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PATH
+set -x LD_LIBRARY_PATH $ROCM_PATH/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PATH
+# 추가적인 안정성을 위한 변수
+# set -x C_INCLUDE_PATH /opt/rocm/include $C_INCLUDE_PATH
+# set -x CPLUS_INCLUDE_PATH /opt/rocm/include $CPLUS_INCLUDE_PATH
 
 # FZF
 # fzf을 직접입력해 파일명 탐색 명내용 
