@@ -115,9 +115,9 @@ set -x LD_LIBRARY_PATH $ROCM_PATH/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PAT
 # set -gx FZF_DEFAULT_OPTS "--ansi"
 #
 #set -gx FZF_CTRL_T_COMMAND "fd --type d --hidden --color=always"
-set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
+# set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 # set -gx FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
-set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
+# set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 set -gx FZF_CTRL_R_OPTS "--reverse --height 100%"
 #set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
