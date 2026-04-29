@@ -111,21 +111,21 @@ set -x LD_LIBRARY_PATH $ROCM_PATH/lib /opt/rocm/lib/migraphx/lib $LD_LIBRARY_PAT
 
 # FZF
 # fzf을 직접입력해 파일명 탐색 명내용 
-set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
-set -gx FZF_DEFAULT_OPTS "--ansi"
+# set -gx FZF_DEFAULT_COMMAND 'fd --type file --color=always --follow --hidden --exclude .git'
+# set -gx FZF_DEFAULT_OPTS "--ansi"
 #
 #set -gx FZF_CTRL_T_COMMAND "fd --type d --hidden --color=always"
 set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
-set -gx FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
+# set -gx FZF_CTRL_F_COMMAND "fd --type d --hidden --color=always . $HOME"
 set -gx FZF_ALT_C_COMMAND "fd --type d --hidden --color=always"
 set -gx FZF_CTRL_R_OPTS "--reverse --height 100%"
 #set -gx FZF_CTRL_T_COMMAND "$FZF_DEFAULT_COMMAND"
 
-#set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+set -gx FZF_DEFAULT_COMMAND "rg --files --hidden --follow --no-ignore"
+set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
 #set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
-#set -gx FZF_CTRL_T_COMMAND "rg --files --hidden --follow --no-ignore"
-#set -gx FZF_ALT_C_COMMAND "find . -depth"
-##set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
+# set -gx FZF_ALT_C_COMMAND "find . -depth"
+set -gx FZF_ALT_C_COMMAND "rg --hidden --files --null | xargs -0 dirname | uniq"
 ##set -gx FZF_ALT_C_COMMAND "rg --hidden --sort-files --files --null 2> /dev/null | xargs -0 dirname | uniq"
 #
 # VENV
